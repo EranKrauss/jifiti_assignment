@@ -3,7 +3,8 @@ import axios from "axios";
 const BASE_URL = 'http://localhost:3000';
 
 const getApplications = async () => {
-    console.log('CLIENT API - getApplications')
+    console.log('CLIENT API - getApplications');
+
     return (axios.get(`${BASE_URL}/app`)
             .then(res => {
                 return res.data;
@@ -13,30 +14,22 @@ const getApplications = async () => {
             })
     );
 };
-const getCards = (appId) => {
-    console.log('CLIENT API - getCards')
-    return (axios.get(`${BASE_URL}/cards?appId=${appId}`)
+const getDataForAppId = (appId) => {
+    console.log('CLIENT API - getDataForAppId');
+
+    return (axios.get(`${BASE_URL}/data?appId=${appId}`)
             .then(res => res)
             .catch(err => {
-                console.error('api  >  getCards  >  err details: ', err.message)
-            })
-    );
-};
-const getTrans = (appId) => {
-    console.log('CLIENT API - getTrans')
-    return (axios.get(`${BASE_URL}/trans?appId=${appId}`)
-            .then(res => res)
-            .catch(err => {
-                console.error('api  >  getTrans  >  err details: ', err.message)
+                console.error('api  >  getDataForAppId  >  err details: ', err.message)
             })
     );
 };
 
+
 export const createApiClient = () => {
     return {
         getApplications,
-        getCards,
-        getTrans
+        getDataForAppId,
     };
 }
 

@@ -17,12 +17,35 @@ app.get('/app', async (req, res) => {
         .catch(err => console.error('server  >  app  > err details: ', err.message))
 });
 
-app.get('/cards', (req, res) => {
-    console.log('getCards');
+app.get('/data', async (req, res) => {
+    console.log('get data');
 
-    Axios.get(`${baseUrl}/cards?appId=${appId}`, {headers: {Authorization: authKey}})
-        .then(({data}) => res.send(data))
-        .catch(err => console.error('server  >  cards  > err details: ', err.message))
+    const {appId} = req.query;
+
+
+    const [cards, trans] = await Promise.all([
+        Axios.get(`${baseUrl}/cards/${appId}`, {headers: {Authorization: authKey}})
+             .then(({data}) => data)
+             .catch(err => console.error('server  >  cards  > err details: ', err.message)),
+        Axios.get(`${baseUrl}/trans/${appId}`, {headers: {Authorization: authKey}})
+            .then(({data}) => data)
+            .catch(err => console.error('server  >  trans  > err details: ', err.message))
+    ]);
+
+    const data = cards?.map(card => {
+        const {id, cardNo, issuer} = card;
+        const currTrans = trans?.filter(tr => tr.cardId === id);
+        return currTrans.map(c => {
+            return {
+                cardNo,
+                issuer,
+                amount: c.amount,
+                transType: c.transType,
+            }
+        })
+    })
+
+    res.send(data);
 });
 
 app.get('/trans', (req, res) => {

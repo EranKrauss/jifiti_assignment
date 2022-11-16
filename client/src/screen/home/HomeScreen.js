@@ -7,7 +7,6 @@ export const HomeScreen = () => {
     const api = useContext(ApiContext);
 
     useEffect(() => {
-        console.log(444)
         api.getApplications()
             .then(res => setData(res))
             .catch(err => console.error('HomeScreen  >  useEffect  >  err details: ', err.message))
