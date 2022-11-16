@@ -8,6 +8,13 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
 
+
+const transTypeMap = {
+    1: 'AUTH',
+    2: 'COMMIT',
+    3: 'REFUND',
+}
+
 export const ApplicationsTable = (props) => {
     const {data} = props;
 
@@ -40,7 +47,7 @@ export const ApplicationsTable = (props) => {
                             </TableCell>
                             <TableCell align="right">{curr.issuer}</TableCell>
                             <TableCell align="right">{curr.amount}</TableCell>
-                            <TableCell align="right">{curr.transType}</TableCell>
+                            <TableCell align="right">{transTypeMap[curr.transType]}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

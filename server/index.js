@@ -21,8 +21,6 @@ app.get('/data', async (req, res) => {
     console.log('get data');
 
     const {appId} = req.query;
-
-
     const [cards, trans] = await Promise.all([
         Axios.get(`${baseUrl}/cards/${appId}`, {headers: {Authorization: authKey}})
              .then(({data}) => data)
@@ -43,8 +41,7 @@ app.get('/data', async (req, res) => {
                 transType: c.transType,
             }
         })
-    })
-
+    }).flatMap(curr => curr);
     res.send(data);
 });
 

@@ -6,12 +6,14 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import {useNavigate} from "react-router-dom";
 
 
 export const ApplicationsTable = (props) => {
     const {data} = props;
-    const handleRowClick = (id) => {
-        console.log(666, id);
+    const navigate = useNavigate();
+    const handleRowClick = (data) => {
+        navigate('/details', {state: {data}});
     }
     if(!data){
         return <div>loading</div>;
@@ -34,7 +36,7 @@ export const ApplicationsTable = (props) => {
                         <TableRow
                             key={app.id}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                            onClick={() => handleRowClick(app.id)}
+                            onClick={() => handleRowClick(app)}
                         >
                             <TableCell component="th" scope="row">
                                 {app.id}
