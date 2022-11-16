@@ -2,6 +2,8 @@ import React, {useContext, useEffect, useState} from "react";
 import {ApplicationsTable} from "./AppDetailsTable";
 import {ApiContext} from "../../App";
 import {useLocation} from "react-router-dom";
+import Title from "../../layout/Title";
+import {Box, Container, Divider} from "@mui/material";
 
 export const ApplicationDetailsScreen = (props) => {
     const state = useLocation();
@@ -22,11 +24,15 @@ export const ApplicationDetailsScreen = (props) => {
         </div>
     }
 
-
     return (
-        <div>
-            <div>{`${id}   ${firstName}   ${lastName}`}</div>
-            <ApplicationsTable data={data}/>
-        </div>
-    )
+        <Container className={'container'}>
+            <div>
+                <Title title={`${id} ${firstName} ${lastName}`}/>
+                <Divider/>
+            </div>
+            <Box className={'table'}>
+                <ApplicationsTable data={data}/>
+            </Box>
+        </Container>
+    );
 };

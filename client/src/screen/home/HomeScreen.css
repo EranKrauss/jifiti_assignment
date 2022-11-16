@@ -1,0 +1,9 @@
+.container {
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
+
+.table {
+    padding: 30px;
+}
