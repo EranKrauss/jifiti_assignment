@@ -1,9 +1,15 @@
 .container {
-    flex-direction: column;
-    align-content: center;
-    justify-content: center;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
 }
 
 .table {
-    padding: 30px;
+  padding: 30px;
+}
+
+.search {
+  padding-right: 200px;
+  padding-left: 30px;
+  margin: 10px 50% 5px 5px;
 }
